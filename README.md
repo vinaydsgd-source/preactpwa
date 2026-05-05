@@ -29,8 +29,8 @@ npm run serve
 # run tests
 npm run test
 
-# regenerate placeholder icons (rarely needed)
-node scripts/generate-icons.js
+# regenerate placeholder icons + screenshots (no extra deps; built-in Node only)
+npm run generate:assets
 ```
 
 ## Testing PWA install per browser
@@ -65,20 +65,21 @@ src/
     useInstallPrompt.js     # beforeinstallprompt handling + iOS detection
   style/
     index.css               # Global styles, CSS vars, dark mode
-  assets/
-    icons/                  # 192/512/maskable + apple-touch-icon
+    assets/
+      icons/                  # 192/512/1024 + maskable 512/1024 + apple-touch-icon-180
+      screenshots/            # narrow + wide install-dialog screenshots
 scripts/
-  generate-icons.js         # Regenerates placeholder PWA icons (no deps)
+  generate-pwa-assets.js    # Regenerates placeholder icons + screenshots (no deps)
 ```
 
-## Replacing the placeholder icons
+## Replacing the placeholder assets
 
-The icons in `src/assets/icons/` are auto-generated placeholders (gradient + "P"). To use your own:
+The icons in `src/assets/icons/` and the screenshots in `src/assets/screenshots/` are auto-generated placeholders (gradient + "P" / abstract UI mocks). To use real ones:
 
-1. Replace any of: `icon-192.png` (192x192), `icon-512.png` (512x512), `icon-maskable-512.png` (512x512 with the logo inside the central 80% safe zone), `apple-touch-icon-180.png` (180x180, opaque - iOS adds the rounded corners).
-2. Re-run `npm run build`.
+- **Icons** - replace any of: `icon-192.png` (192x192), `icon-512.png` (512x512), `icon-1024.png` (1024x1024), `icon-maskable-512.png` / `icon-maskable-1024.png` (logo inside the central 80% safe zone), `apple-touch-icon-180.png` (180x180, opaque - iOS adds the rounded corners; do not pre-round).
+- **Screenshots** - replace any of: `mobile-hero.png` / `mobile-features.png` (540x720 portrait, `form_factor: narrow`), `wide-hero.png` / `wide-features.png` (1280x720 landscape, `form_factor: wide`). These show in Chromium's rich install dialog.
 
-Apple-touch-icon must be opaque (no transparency) and must not have rounded corners pre-applied.
+After replacing assets, re-run `npm run build`. To regenerate the placeholder set anytime, run `npm run generate:assets`.
 
 ## Notes
 

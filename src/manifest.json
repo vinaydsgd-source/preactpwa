@@ -2,11 +2,13 @@
 	"name": "Preact PWA",
 	"short_name": "PreactPWA",
 	"description": "A simple installable Preact landing page that works on Chrome, Samsung Internet, Firefox and iOS Safari.",
-	"start_url": "/?source=pwa",
+	"start_url": "/?utm_source=pwa&utm_medium=launcher",
 	"scope": "/",
 	"display": "standalone",
-	"orientation": "portrait",
-	"background_color": "#0f172a",
+	"orientation": "any",
+	"lang": "en",
+	"categories": ["productivity", "utilities"],
+	"background_color": "#0b1120",
 	"theme_color": "#6366f1",
 	"icons": [
 		{
@@ -22,10 +24,52 @@
 			"purpose": "any"
 		},
 		{
+			"src": "/assets/icons/icon-1024.png",
+			"type": "image/png",
+			"sizes": "1024x1024",
+			"purpose": "any"
+		},
+		{
 			"src": "/assets/icons/icon-maskable-512.png",
 			"type": "image/png",
 			"sizes": "512x512",
 			"purpose": "maskable"
+		},
+		{
+			"src": "/assets/icons/icon-maskable-1024.png",
+			"type": "image/png",
+			"sizes": "1024x1024",
+			"purpose": "maskable"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "/assets/screenshots/mobile-hero.png",
+			"type": "image/png",
+			"sizes": "540x720",
+			"form_factor": "narrow",
+			"label": "Hero - install the Preact PWA in one tap"
+		},
+		{
+			"src": "/assets/screenshots/mobile-features.png",
+			"type": "image/png",
+			"sizes": "540x720",
+			"form_factor": "narrow",
+			"label": "Features - fast, offline-ready, installable"
+		},
+		{
+			"src": "/assets/screenshots/wide-hero.png",
+			"type": "image/png",
+			"sizes": "1280x720",
+			"form_factor": "wide",
+			"label": "Hero - install the Preact PWA in one tap"
+		},
+		{
+			"src": "/assets/screenshots/wide-features.png",
+			"type": "image/png",
+			"sizes": "1280x720",
+			"form_factor": "wide",
+			"label": "Features - fast, offline-ready, installable"
 		}
 	]
 }
