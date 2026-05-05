@@ -1,0 +1,31 @@
+{
+	"name": "Preact PWA",
+	"short_name": "PreactPWA",
+	"description": "A simple installable Preact landing page that works on Chrome, Samsung Internet, Firefox and iOS Safari.",
+	"start_url": "/?source=pwa",
+	"scope": "/",
+	"display": "standalone",
+	"orientation": "portrait",
+	"background_color": "#0f172a",
+	"theme_color": "#6366f1",
+	"icons": [
+		{
+			"src": "/assets/icons/icon-192.png",
+			"type": "image/png",
+			"sizes": "192x192",
+			"purpose": "any"
+		},
+		{
+			"src": "/assets/icons/icon-512.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "any"
+		},
+		{
+			"src": "/assets/icons/icon-maskable-512.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "maskable"
+		}
+	]
+}
