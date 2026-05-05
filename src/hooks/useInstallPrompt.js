@@ -9,6 +9,14 @@ const detectIos = () => {
 	return isIosDevice || isIpadOs;
 };
 
+// Samsung Internet's WebAPK install path triggers Google Play Protect's
+// "Unsafe app blocked" dialog on Android 14+. We avoid the native prompt on
+// this browser and route users through the menu shortcut path instead.
+const detectSamsungInternet = () => {
+	if (typeof navigator === 'undefined') return false;
+	return /SamsungBrowser/i.test(navigator.userAgent || '');
+};
+
 const detectStandalone = () => {
 	if (typeof window === 'undefined') return false;
 	const mq = window.matchMedia && window.matchMedia('(display-mode: standalone)').matches;
@@ -20,9 +28,11 @@ export default function useInstallPrompt() {
 	const [deferredPrompt, setDeferredPrompt] = useState(null);
 	const [isInstalled, setIsInstalled] = useState(false);
 	const [isIos, setIsIos] = useState(false);
+	const [isSamsungInternet, setIsSamsungInternet] = useState(false);
 
 	useEffect(() => {
 		setIsIos(detectIos());
+		setIsSamsungInternet(detectSamsungInternet());
 		setIsInstalled(detectStandalone());
 
 		const onBeforeInstallPrompt = (event) => {
@@ -69,6 +79,7 @@ export default function useInstallPrompt() {
 	return {
 		canInstall: Boolean(deferredPrompt),
 		isIos,
+		isSamsungInternet,
 		isInstalled,
 		promptInstall,
 	};

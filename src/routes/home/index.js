@@ -39,8 +39,8 @@ const FeatureIcon = ({ name }) => {
 };
 
 const InstallButtons = ({ size = 'lg' }) => {
-	const { canInstall, isIos, isInstalled, promptInstall } = useInstallPrompt();
-	const [showIosHelp, setShowIosHelp] = useState(false);
+	const { canInstall, isIos, isSamsungInternet, isInstalled, promptInstall } = useInstallPrompt();
+	const [showHelp, setShowHelp] = useState(false);
 
 	if (isInstalled) {
 		return (
@@ -50,19 +50,21 @@ const InstallButtons = ({ size = 'lg' }) => {
 		);
 	}
 
+	const usesManualGuide = isIos || isSamsungInternet;
+
 	const handleInstallClick = async () => {
-		if (isIos) {
-			setShowIosHelp(true);
+		if (usesManualGuide) {
+			setShowHelp(true);
 			return;
 		}
 		if (canInstall) {
 			await promptInstall();
 			return;
 		}
-		setShowIosHelp(true);
+		setShowHelp(true);
 	};
 
-	const label = isIos ? 'Add to Home Screen' : 'Install App';
+	const label = usesManualGuide ? 'Add to Home Screen' : 'Install App';
 	const btnClass = size === 'sm' ? `${style.btn} ${style.btnPrimary} ${style.btnSm}` : `${style.btn} ${style.btnPrimary}`;
 
 	return (
@@ -76,27 +78,34 @@ const InstallButtons = ({ size = 'lg' }) => {
 				<span>{label}</span>
 			</button>
 
-			{showIosHelp && (
-				<div class={style.modalBackdrop} role="dialog" aria-modal="true" aria-labelledby="iosHelpTitle" onClick={() => setShowIosHelp(false)}>
+			{showHelp && (
+				<div class={style.modalBackdrop} role="dialog" aria-modal="true" aria-labelledby="installHelpTitle" onClick={() => setShowHelp(false)}>
 					<div class={style.modalCard} onClick={(e) => e.stopPropagation()}>
-						<h3 id="iosHelpTitle">Install on this device</h3>
-						{isIos ? (
+						<h3 id="installHelpTitle">Install on this device</h3>
+						{isIos && (
 							<ol>
 								<li>Tap the <strong>Share</strong> button in the Safari toolbar.</li>
 								<li>Scroll and tap <strong>Add to Home Screen</strong>.</li>
 								<li>Tap <strong>Add</strong> in the top-right corner.</li>
 							</ol>
-						) : (
+						)}
+						{!isIos && isSamsungInternet && (
+							<ol>
+								<li>Tap the <strong>menu</strong> button (<strong>≡</strong>) at the bottom-right.</li>
+								<li>Choose <strong>Add page to</strong>.</li>
+								<li>Tap <strong>Home screen</strong>, then <strong>Add</strong>.</li>
+							</ol>
+						)}
+						{!isIos && !isSamsungInternet && (
 							<div>
 								<p>Use your browser menu to add this app to your home screen:</p>
 								<ul>
-									<li><strong>Chrome / Edge:</strong> menu (<strong>⋮</strong>) -> <strong>Add to home screen</strong>.</li>
-									<li><strong>Samsung Internet:</strong> menu (<strong>≡</strong>) -> <strong>Add page to</strong> -> <strong>Home screen</strong>.</li>
+									<li><strong>Chrome / Edge:</strong> menu (<strong>⋮</strong>) -> <strong>Install app</strong> or <strong>Add to home screen</strong>.</li>
 									<li><strong>Firefox (Android):</strong> menu (<strong>⋮</strong>) -> <strong>Install</strong>.</li>
 								</ul>
 							</div>
 						)}
-						<button type="button" class={`${style.btn} ${style.btnGhost}`} onClick={() => setShowIosHelp(false)}>
+						<button type="button" class={`${style.btn} ${style.btnGhost}`} onClick={() => setShowHelp(false)}>
 							Got it
 						</button>
 					</div>

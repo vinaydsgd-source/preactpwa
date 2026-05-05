@@ -4,7 +4,7 @@
 	"description": "A simple installable Preact landing page that works on Chrome, Samsung Internet, Firefox and iOS Safari.",
 	"start_url": "/?source=pwa",
 	"scope": "/",
-	"display": "browser",
+	"display": "standalone",
 	"orientation": "portrait",
 	"background_color": "#0f172a",
 	"theme_color": "#6366f1",
