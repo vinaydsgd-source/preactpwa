@@ -336,6 +336,7 @@
 }
 
 .modalCard ol,
+.modalCard ul,
 .modalCard p {
 	color: var(--text-muted);
 	margin: 0 0 1.25rem;
@@ -348,6 +349,10 @@
 
 .modalCard li {
 	margin-bottom: 0.4rem;
+}
+
+.modalCard div p {
+	margin-bottom: 0.5rem;
 }
 
 @keyframes fadeIn {

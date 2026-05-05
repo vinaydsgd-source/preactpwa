@@ -87,11 +87,14 @@ const InstallButtons = ({ size = 'lg' }) => {
 								<li>Tap <strong>Add</strong> in the top-right corner.</li>
 							</ol>
 						) : (
-							<p>
-								Your browser hasn't offered an install prompt yet. Try opening the page in Chrome,
-								Edge, Samsung Internet or Firefox on Android, then use the browser menu to choose
-								<strong> Install app</strong> or <strong>Add to Home Screen</strong>.
-							</p>
+							<div>
+								<p>Use your browser menu to add this app to your home screen:</p>
+								<ul>
+									<li><strong>Chrome / Edge:</strong> menu (<strong>⋮</strong>) -> <strong>Add to home screen</strong>.</li>
+									<li><strong>Samsung Internet:</strong> menu (<strong>≡</strong>) -> <strong>Add page to</strong> -> <strong>Home screen</strong>.</li>
+									<li><strong>Firefox (Android):</strong> menu (<strong>⋮</strong>) -> <strong>Install</strong>.</li>
+								</ul>
+							</div>
 						)}
 						<button type="button" class={`${style.btn} ${style.btnGhost}`} onClick={() => setShowIosHelp(false)}>
 							Got it
